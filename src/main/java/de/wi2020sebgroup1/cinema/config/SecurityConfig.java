@@ -20,51 +20,51 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {auth.inMemoryAuthentication()
-        .withUser("user").password(passwordEncoder().encode("password")).roles("USER")
-        .and()
-        .withUser("admin").password(passwordEncoder().encode("password")).roles("ADMIN");
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-		        .csrf().disable()
-		        .authorizeRequests()
-		        .antMatchers("/admin/**").hasRole("ADMIN")
-		        .antMatchers("/v1*").anonymous()
-		        .antMatchers("/login*").permitAll()
-		        .and()
-		        .cors()
-                .configurationSource(corsConfigurationSource())
-                .and()
-                .csrf()
-                .disable()
-                .authorizeRequests()
-                .anyRequest()
-                .permitAll()
-                .and()
-                .httpBasic()
-        ;
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH"));
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-
-        return source;
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {auth.inMemoryAuthentication()
+//        .withUser("user").password(passwordEncoder().encode("password")).roles("USER")
+//        .and()
+//        .withUser("admin").password(passwordEncoder().encode("password")).roles("ADMIN");
+//    }
+//
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//		        .csrf().disable()
+//		        .authorizeRequests()
+//		        .antMatchers("/admin/**").hasRole("ADMIN")
+//		        .antMatchers("/v1*").anonymous()
+//		        .antMatchers("/login*").permitAll()
+//		        .and()
+//		        .cors()
+//                .configurationSource(corsConfigurationSource())
+//                .and()
+//                .csrf()
+//                .disable()
+//                .authorizeRequests()
+//                .anyRequest()
+//                .permitAll()
+//                .and()
+//                .httpBasic()
+//        ;
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//
+//        configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH"));
+//        configuration.setAllowCredentials(true);
+//        configuration.setAllowedHeaders(Arrays.asList("*"));
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//
+//        return source;
+//    }
 }
