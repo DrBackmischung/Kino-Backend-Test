@@ -47,17 +47,7 @@ jobs:
   JUnit-Test:
     needs: Build
     runs-on: ubuntu-latestname
-    strategy:
-      matrix:
-        java: [ '8', '11', '13', '16' ]
     steps:
-      - name: Setup Java JDK
-        uses: actions/setup-java@v2.0.0
-        with:
-          distribution: 'zulu' 
-          java-version: ${{ matrix.Java }}
-      - name: Checkout current code state
-        uses: actions/checkout@v2
       - name: Download junit console starter
         run: curl -O https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.8.0-M1/junit-platform-console-standalone-1.8.0-M1.jar
       - name: Compile and Run JUnit Tests
