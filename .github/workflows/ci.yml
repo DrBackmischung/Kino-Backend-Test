@@ -8,9 +8,8 @@ on:
   pull_request:
 
 jobs:
-  build:
-    runs-on: windows-latest
-
+  Build:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,7 +21,9 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
-
+  Test:
+    runs-on: ubuntu-latest
+    steps:
       - name: Archive Jacoco reports
         uses: actions/upload-artifact@v2.2.4
         with:
@@ -31,6 +32,8 @@ jobs:
           
       - name: Check Coverage
         uses: cicirello/jacoco-badge-generator@v2
+        env:
+          JAVA_HOME: /opt/hostedtoolcache/Java_Adopt_jdk/11.0.11-9/x64
         with:
           jacoco-csv-file: target/site/jacoco/jacoco.csv
           on-missing-report: fail
