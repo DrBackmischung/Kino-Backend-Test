@@ -26,12 +26,8 @@ jobs:
     needs: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Archive Jacoco reports
-        uses: actions/upload-artifact@v2.2.4
-        with:
-          name: jacoco-reports
-          path: target/site/jacoco
-          
+      - name: Run Unit Tests
+        run: mvn verify
       - name: Check Coverage
         uses: cicirello/jacoco-badge-generator@v2
         env:
