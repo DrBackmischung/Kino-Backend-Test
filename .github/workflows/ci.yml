@@ -21,7 +21,8 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
-  Test:
+        
+  Maven-Test:
     needs: Build
     runs-on: ubuntu-latest
     steps:
