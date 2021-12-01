@@ -18,23 +18,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: Run Unit Tests
+      - name: MVN Test
         run: mvn test
-      - name: Maven verify
+      - name: MVN Verify
         run: mvn verify
-        
-  Coverage:
-    needs: Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check Coverage
-        uses: cicirello/jacoco-badge-generator@v2
-        env:
-          JAVA_HOME: /opt/hostedtoolcache/Java_Adopt_jdk/11.0.11-9/x64
-        with:
-          jacoco-csv-file: target/site/jacoco/jacoco.csv
-          on-missing-report: fail
-          fail-if-coverage-less-than: 75
-          fail-if-branches-less-than: 75
-          fail-on-coverage-decrease: false
-          fail-on-branches-decrease: false
