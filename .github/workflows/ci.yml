@@ -19,6 +19,8 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Run Unit Tests
+        run: mvn test
+      - name: Maven verify
         run: mvn verify
         
   Coverage:
